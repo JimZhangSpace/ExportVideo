@@ -49,6 +49,7 @@ android {
     exclude 'META-INF/LICENSE'
     exclude 'META-INF/NOTICE'
   }
+  buildToolsVersion '28.0.3'
 }
 
 dependencies {
@@ -76,10 +77,9 @@ dependencies {
   implementation 'com.matthew-tamlin:sliding-intro-screen:3.2.0'
   implementation 'com.dlazaro66.qrcodereaderview:qrcodereaderview:2.0.2'
   implementation 'com.github.PhilJay:MPAndroidChart:v3.0.2'
-  testImplementation 'junit:junit:4.12'
   implementation 'com.amazonaws:aws-android-sdk-s3:2.7.+'
-  implementation ('com.amazonaws:aws-android-sdk-mobile-client:2.7.+@aar') { transitive = true }
-  implementation ('com.amazonaws:aws-android-sdk-auth-userpools:2.7.+@aar') { transitive = true }
+  implementation('com.amazonaws:aws-android-sdk-mobile-client:2.7.+@aar') { transitive = true }
+  implementation('com.amazonaws:aws-android-sdk-auth-userpools:2.7.+@aar') { transitive = true }
   androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-alpha4'
   androidTestImplementation 'androidx.test:runner:1.1.0-alpha4'
   androidTestImplementation 'androidx.test.espresso:espresso-idling-resource:3.1.0-alpha4'

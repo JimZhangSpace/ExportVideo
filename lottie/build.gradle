@@ -28,10 +28,9 @@ android {
 }
 
 dependencies {
-  implementation "androidx.appcompat:appcompat:${androidXVersion}"
-  testImplementation "org.mockito:mockito-core:2.15.0"
-  testImplementation 'junit:junit:4.12'
-  testImplementation "org.robolectric:robolectric:4.0-alpha-3"
+    implementation "androidx.appcompat:appcompat:${androidXVersion}"
+    testImplementation 'org.mockito:mockito-core:2.15.0'
+    testImplementation 'org.robolectric:robolectric:4.0-alpha-3'
 }
 
 task javadoc(type: Javadoc) {
