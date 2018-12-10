@@ -5,7 +5,7 @@ import com.airbnb.lottie.LottieDrawable
 
 class FrameCreator(private val lottieDrawable: LottieDrawable) {
 
-    private val VIDEO_WIDTH_PX: Float = 100.0f
+    private val VIDEO_WIDTH_PX: Float = 600.0f
 
     init {
         lottieDrawable.scale = VIDEO_WIDTH_PX / lottieDrawable.intrinsicWidth

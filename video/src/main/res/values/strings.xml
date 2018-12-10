@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">video</string>
+
+    <string name="succeeded">成功</string>
+    <string name="failed">失败</string>
+    <string name="state_running">[running]</string>
 </resources>

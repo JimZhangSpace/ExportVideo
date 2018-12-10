@@ -1,5 +1,8 @@
 package com.android.zj.video
 
+import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.media.MediaCodec
 import android.media.MediaCodecInfo
@@ -9,10 +12,11 @@ import android.util.Log
 import android.view.Surface
 import java.io.File
 import java.io.IOException
+import java.io.InputStream
 
-class Recorder {
+class Recorder(context: Context, file: File) {
 
-    public var TAG: String = "Recorder"
+    var TAG: String = "Recorder"
     private val VERBOSE: Boolean = true
 
     private val MIME_TYPE = "video/avc"
@@ -31,15 +35,23 @@ class Recorder {
     private var mTrackIndex: Int = 0
     private var mMuxerStarted: Boolean = false
     private var mFakePts: Long = 0
+    private val mContext: Context = context
 
+    init {
+        prepareEncoder(file)
+    }
 
-    public fun nextFrame(currentFrame: Drawable) {
+    fun nextFrame(currentFrame: Drawable) {
 
-        prepareEncoder(File("my.mp4"))
         drainEncoder(false)
         val canvas = mInputSurface?.lockCanvas(null)
         try {
-            canvas?.drawBitmap(null,0f,0f,null)
+            val inputStream: InputStream = mContext.resources.openRawResource(R.raw.ic_launcher)
+            val bitmapDrawable: BitmapDrawable = BitmapDrawable(inputStream)
+            val test: Bitmap = bitmapDrawable.bitmap
+
+//            val bitmap: Bitmap = BitmapFactory.decodeResource(mContext.resources, R.drawable.bg_oval_white)
+            canvas?.drawBitmap(test, 0f, 0f, null)
             currentFrame.draw(canvas)
         } finally {
             mInputSurface?.unlockCanvasAndPost(canvas)
@@ -96,7 +108,7 @@ class Recorder {
                         ?: throw RuntimeException("encoderOutputBuffer " + encoderStatus +
                                 " was null")
 
-                if (mBufferInfo?.flags?.and(MediaCodec.BUFFER_FLAG_CODEC_CONFIG)  != 0) {
+                if (mBufferInfo?.flags?.and(MediaCodec.BUFFER_FLAG_CODEC_CONFIG) != 0) {
                     // The codec config data was pulled out and fed to the muxer when we got
                     // the INFO_OUTPUT_FORMAT_CHANGED status.  Ignore it.
                     if (VERBOSE) Log.d(TAG, "ignoring BUFFER_FLAG_CODEC_CONFIG")

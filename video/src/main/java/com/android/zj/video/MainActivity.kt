@@ -4,10 +4,11 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.airbnb.lottie.LottieCompositionFactory
 import com.airbnb.lottie.LottieDrawable
+import java.io.File
 
 class MainActivity : AppCompatActivity() {
 
-    public var TAG: String = "MainActivity"
+    val TAG: String = "MainActivity"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,6 +18,6 @@ class MainActivity : AppCompatActivity() {
         val lottieDrawable = LottieDrawable()
         lottieDrawable.composition = lottieComposition
 
-        RecordingOperation(Recorder(),FrameCreator(lottieDrawable)).start()
+        RecordingOperation(Recorder(this, File(filesDir, "my.mp4")), FrameCreator(lottieDrawable)).start()
     }
 }
